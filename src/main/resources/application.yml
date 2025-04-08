@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ms-template-redis
+  datasource:
+    url: jdbc:mysql://localhost:3306/microservice_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost  # Redis server IP
+      port: 6379       # Redis default port
+      password: ""     # No password set (if none)
+      timeout: 2000ms  # Connection timeout for Redis
+      time-to-live: 5s
+    jedis:
+      pool:
+        max-active: 10      # Maximum active connections in the pool
+        max-idle: 5         # Maximum idle connections in the pool
+        min-idle: 1         # Minimum idle connections in the pool
+        max-wait: 2000      # Maximum wait time for getting a connection (in milliseconds)
+  logging:
+    level:
+      root: DEBUG # Enable debug-level logging
