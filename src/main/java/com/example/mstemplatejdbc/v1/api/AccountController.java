@@ -1,7 +1,7 @@
-package com.example.mstemplateredis.v1.api;
+package com.example.mstemplatejdbc.v1.api;
 
-import com.example.mstemplateredis.v1.model.Account;
-import com.example.mstemplateredis.v1.service.AccountService;
+import com.example.mstemplatejdbc.v1.model.Account;
+import com.example.mstemplatejdbc.v1.service.AccountService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/brd-api/ms-template-redis/v1/accounts")
+@RequestMapping("/brd-api/ms-template-jdbc/v1/accounts")
 @Slf4j
 public class AccountController {
     private final AccountService accountService;

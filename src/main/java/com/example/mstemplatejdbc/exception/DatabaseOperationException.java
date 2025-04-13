@@ -1,4 +1,4 @@
-package com.example.mstemplateredis.exception;
+package com.example.mstemplatejdbc.exception;
 
 public class DatabaseOperationException extends RuntimeException {
     public DatabaseOperationException(String message) {

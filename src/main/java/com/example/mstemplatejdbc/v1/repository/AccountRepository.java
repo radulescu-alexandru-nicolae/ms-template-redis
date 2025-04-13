@@ -1,8 +1,8 @@
-package com.example.mstemplateredis.v1.repository;
-import com.example.mstemplateredis.config.CustomerContextHolder;
-import com.example.mstemplateredis.exception.*;
-import com.example.mstemplateredis.utils.Constants;
-import com.example.mstemplateredis.v1.model.Account;
+package com.example.mstemplatejdbc.v1.repository;
+import com.example.mstemplatejdbc.config.CustomerContextHolder;
+import com.example.mstemplatejdbc.exception.*;
+import com.example.mstemplatejdbc.utils.Constants;
+import com.example.mstemplatejdbc.v1.model.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.example.mstemplateredis.utils.Constants.SqlConstants.*;
+import static com.example.mstemplatejdbc.utils.Constants.SqlConstants.*;
 
 @Repository
 @Slf4j

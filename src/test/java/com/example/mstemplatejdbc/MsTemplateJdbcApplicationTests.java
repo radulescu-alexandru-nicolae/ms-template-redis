@@ -1,10 +1,10 @@
-package com.example.mstemplateredis;
+package com.example.mstemplatejdbc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsTemplateRedisApplicationTests {
+class MsTemplateJdbcApplicationTests {
 
 	@Test
 	void contextLoads() {

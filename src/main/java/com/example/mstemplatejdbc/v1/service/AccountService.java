@@ -1,7 +1,7 @@
-package com.example.mstemplateredis.v1.service;
+package com.example.mstemplatejdbc.v1.service;
 
-import com.example.mstemplateredis.v1.model.Account;
-import com.example.mstemplateredis.v1.repository.AccountRepository;
+import com.example.mstemplatejdbc.v1.model.Account;
+import com.example.mstemplatejdbc.v1.repository.AccountRepository;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -24,7 +24,6 @@ public class AccountService {
      * Fetches all accounts for the specified customerId from cache or database.
      * Caches the result under the customerId.
      */
-    @Cacheable(value = "accounts", key = "#customerId")
     public List<Account> getAccountsByCustomerId(@NotBlank String customerId) {
         log.debug("****************** Fetching accounts for customer: {}", customerId);
         List<Account> accounts = accountRepository.getAccounts(customerId);
@@ -37,7 +36,6 @@ public class AccountService {
      * After this, the next fetch will go to the database and repopulate the cache.
      */
     @Transactional
-    @CacheEvict(value = "accounts", key = "#customerId")
     public Account createAccount(Account account, String customerId) {
         log.debug("****************** Insert account for customer: {}", customerId);
         accountRepository.insertAccount(account, customerId);
@@ -50,7 +48,6 @@ public class AccountService {
      * After this, the next fetch will go to the database and repopulate the cache.
      */
     @Transactional
-    @CacheEvict(value = "accounts", key = "#customerId")
     public void updateAccount(String iban, BigDecimal balance, String customerId) {
         log.debug("****************** Updating account for IBAN: {}", iban);
         accountRepository.updateAccount(iban, balance, customerId);
@@ -62,7 +59,6 @@ public class AccountService {
      * After this, the next fetch will go to the database and repopulate the cache.
      */
     @Transactional
-    @CacheEvict(value = "accounts", key = "#customerId")
     public void deleteAccount(String iban, String customerId) {
         log.debug("****************** Deleting account for IBAN: {}", iban);
         accountRepository.deleteAccount(iban, customerId);
