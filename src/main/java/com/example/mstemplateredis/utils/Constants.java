@@ -7,6 +7,7 @@ public class Constants {
     public static final String iban = "iban";
 
     public static final String balance = "balance";
+    public static final String cacheAcccountKey = "accounts::";
 
         public static class SqlConstants{
             public static final String retriveAccountsSql = """

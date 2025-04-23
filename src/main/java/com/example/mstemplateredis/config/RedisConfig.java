@@ -1,5 +1,7 @@
 package com.example.mstemplateredis.config;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.transaction.TransactionAwareCacheManagerProxy;
@@ -20,25 +22,33 @@ import java.time.Duration;
 @EnableCaching
 public class RedisConfig {
 
-    @Value("${spring.data.redis.time-to-live}") // Read TTL from application.yml
+    @Value("${spring.data.redis.time-to-live}")
     private String ttl;
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         Duration ttlDuration = parseTtl(ttl);
 
-        // Configure RedisCacheWriter
+        // Configure RedisCacheWriter, which handles the actual writing of cache data
         RedisCacheWriter cacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
 
+        // Configure the RedisCacheConfiguration
         RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(Object.class)))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .entryTtl(ttlDuration);  // Apply the TTL
+                .entryTtl(ttlDuration);  // Apply the TTL (Time To Live) to the cache entries
 
-        // Create RedisCacheManager
+        // Create the RedisCacheManager with the defined cacheWriter and cacheConfig
         RedisCacheManager cacheManager = new RedisCacheManager(cacheWriter, cacheConfig);
 
-        // Return a TransactionAwareCacheManagerProxy to ensure the cache is transaction-aware
+        // Return a TransactionAwareCacheManagerProxy to ensure the cache operations are transaction-aware.
+        // This is primarily used when annotations such as @Cacheable, @CacheEvict, and other Spring Caching annotations
+        // are involved. These annotations manage cache within the context of a transaction, and
+        // the TransactionAwareCacheManagerProxy ensures cache operations are consistent and aligned with
+        // the transaction boundaries (i.e., cache updates will be committed only if the transaction is committed).
+        //
+        // Note that this proxy is used for managing cache operations in transactional contexts.
+        // When using RedisTemplate directly, no such transactional support is required.
         return new TransactionAwareCacheManagerProxy(cacheManager);
     }
 
@@ -47,9 +57,17 @@ public class RedisConfig {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
 
-        // Set the key and value serializers
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.activateDefaultTyping(
+                objectMapper.getPolymorphicTypeValidator(),
+                ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY
+        );
+        Jackson2JsonRedisSerializer<Object> serializer =
+                new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
+
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class)); // Serialize complex objects like Account
+        redisTemplate.setValueSerializer(serializer);
 
         return redisTemplate;
     }

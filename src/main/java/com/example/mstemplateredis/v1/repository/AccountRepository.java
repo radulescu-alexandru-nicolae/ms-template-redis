@@ -1,12 +1,12 @@
 package com.example.mstemplateredis.v1.repository;
-import com.example.mstemplateredis.config.CustomerContextHolder;
+
 import com.example.mstemplateredis.exception.*;
 import com.example.mstemplateredis.utils.Constants;
 import com.example.mstemplateredis.v1.model.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,8 +25,6 @@ public class AccountRepository {
 
     public List<Account> getAccounts(String customerId) {
         log.debug("************* AccountRepository.getAccounts for customer ID: {}", customerId);
-        CustomerContextHolder.setCustomerId(customerId);
-
         try {
             List<Account> accounts = jdbcClient.sql(retriveAccountsSql)
                     .param(Constants.customerId, customerId)
@@ -42,8 +40,6 @@ public class AccountRepository {
 
     public void insertAccount(Account account, String customerId) {
         log.debug("************* AccountRepository.insertAccount for customer ID: {}", customerId);
-        CustomerContextHolder.setCustomerId(customerId);
-
         try {
             int rows = jdbcClient.sql(insertSql)
                     .param(Constants.iban, account.getIban())
@@ -61,8 +57,7 @@ public class AccountRepository {
     }
 
     public void updateAccount(String iban, BigDecimal balance, String customerId) {
-        log.debug("************* AccountRepository.updateAccount for customer ID: {}, IBAN: {}", customerId,iban);
-        CustomerContextHolder.setCustomerId(customerId);
+        log.debug("************* AccountRepository.updateAccount for customer ID: {}, IBAN: {}", customerId, iban);
 
         try {
             int rows = jdbcClient.sql(updateSql)
@@ -82,7 +77,6 @@ public class AccountRepository {
 
     public void deleteAccount(String iban, String customerId) {
         log.debug("************* AccountRepository.deleteAccount for customer ID: {}, IBAN: {}", customerId, iban);
-        CustomerContextHolder.setCustomerId(customerId);
 
         try {
             int rows = jdbcClient.sql(deleteSql)
@@ -100,12 +94,11 @@ public class AccountRepository {
     }
 
 
-
     private void validateRowsAffected(int rows, String operation, String iban) {
         if (rows < 1) {
             String message = String.format("Failed to %s account for IBAN: %s", operation, iban);
             log.error(message);
-            throw new DatabaseOperationException(message);
+            throw new AccountNotFoundException(message);
         }
     }
 }
