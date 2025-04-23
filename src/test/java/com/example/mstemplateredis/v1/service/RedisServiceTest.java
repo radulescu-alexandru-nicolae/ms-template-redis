@@ -192,7 +192,6 @@ class RedisServiceTest {
             }
         }
     }
-
     @Nested
     class ParseTtlTest {
 
