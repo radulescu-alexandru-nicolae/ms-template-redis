@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    active:
+      - default
   application:
     name: ms-template-redis
   datasource:
@@ -22,3 +25,4 @@ spring:
   logging:
     level:
       root: DEBUG # Enable debug-level logging
+
