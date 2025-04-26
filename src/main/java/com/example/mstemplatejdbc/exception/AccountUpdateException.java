@@ -1,4 +1,4 @@
-package com.example.mstemplateredis.exception;
+package com.example.mstemplatejdbc.exception;
 
 public class AccountUpdateException extends RuntimeException {
     public AccountUpdateException(String message, Throwable cause) {

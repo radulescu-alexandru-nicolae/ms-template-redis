@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "67626eca-4b06-4b67-9de5-bfa15e99329b",
+		"name": "jdbc-template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17093897"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId} Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/brd-api/ms-template-jdbc/v1/accounts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"brd-api",
+						"ms-template-jdbc",
+						"v1",
+						"accounts",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}\" -H \"Content-Type: application/json\"\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId} Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"iban\": \"DE75512108003213126131\",\r\n            \"customerId\": \"1001\",\r\n            \"balance\": 1000.50\r\n          }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/brd-api/ms-template-jdbc/v1/accounts/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"brd-api",
+						"ms-template-jdbc",
+						"v1",
+						"accounts",
+						"1001"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \"http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n            \"iban\": \"DE75512108001245126101\",\r\n            \"customerId\": \"{customerId}\",\r\n            \"balance\": 1000.50\r\n          }'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}/update?iban=DE75512108001245126101&balance=1500.75 Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/brd-api/ms-template-jdbc/v1/accounts/1001/update?iban=DE75512108001245126109&balance=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"brd-api",
+						"ms-template-jdbc",
+						"v1",
+						"accounts",
+						"1001",
+						"update"
+					],
+					"query": [
+						{
+							"key": "iban",
+							"value": "DE75512108001245126109"
+						},
+						{
+							"key": "balance",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}/update?iban=DE75512108001245126101&balance=1500.75\" -H \"Content-Type: application/json\"\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}/delete/{iban} Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/brd-api/ms-template-jdbc/v1/accounts/1001/delete/DE75512108001243126131",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"brd-api",
+						"ms-template-jdbc",
+						"v1",
+						"accounts",
+						"1001",
+						"delete",
+						"DE75512108001243126131"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE \"http://localhost:8080/brd-api/ms-template-redis/v1/accounts/{customerId}/delete/{iban}\" -H \"Content-Type: application/json\"\r\n"
+			},
+			"response": []
+		}
+	]
+}

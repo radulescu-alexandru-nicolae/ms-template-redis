@@ -1,7 +1,7 @@
-package com.example.mstemplateredis.v1.service;
+package com.example.mstemplatejdbc.v1.service;
 
-import com.example.mstemplateredis.v1.model.Account;
-import com.example.mstemplateredis.v1.repository.AccountRepository;
+import com.example.mstemplatejdbc.v1.model.Account;
+import com.example.mstemplatejdbc.v1.repository.AccountRepository;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
