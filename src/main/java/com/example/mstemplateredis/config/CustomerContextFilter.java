@@ -1,4 +1,4 @@
-package com.example.mstemplatejdbc.config;
+package com.example.mstemplateredis.config;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

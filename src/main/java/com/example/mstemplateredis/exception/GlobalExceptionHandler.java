@@ -1,6 +1,6 @@
-package com.example.mstemplatejdbc.exception;
+package com.example.mstemplateredis.exception;
 
-import com.example.mstemplatejdbc.config.CustomerContextHolder;
+import com.example.mstemplateredis.config.CustomerContextHolder;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSourceResolvable;

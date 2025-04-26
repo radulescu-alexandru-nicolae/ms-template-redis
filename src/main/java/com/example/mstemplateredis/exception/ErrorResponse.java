@@ -1,4 +1,4 @@
-package com.example.mstemplatejdbc.exception;
+package com.example.mstemplateredis.exception;
 
 import java.time.Instant;
 

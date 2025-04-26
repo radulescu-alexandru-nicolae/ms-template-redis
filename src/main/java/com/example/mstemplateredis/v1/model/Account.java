@@ -1,4 +1,4 @@
-package com.example.mstemplatejdbc.v1.model;
+package com.example.mstemplateredis.v1.model;
 
 import jakarta.validation.constraints.*;
 import lombok.*;

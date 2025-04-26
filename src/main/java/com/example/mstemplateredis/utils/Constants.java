@@ -1,4 +1,4 @@
-package com.example.mstemplatejdbc.utils;
+package com.example.mstemplateredis.utils;
 
 public class Constants {
 

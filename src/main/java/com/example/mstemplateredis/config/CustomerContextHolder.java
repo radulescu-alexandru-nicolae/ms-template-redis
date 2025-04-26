@@ -1,4 +1,4 @@
-package com.example.mstemplatejdbc.config;
+package com.example.mstemplateredis.config;
 
 public class CustomerContextHolder {
     private static final ThreadLocal<String> customerIdHolder = new ThreadLocal<>();
